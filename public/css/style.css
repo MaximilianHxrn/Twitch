@@ -1,7 +1,6 @@
 html,
 body,
-#twitchEmbed,
-#twitchChat {
+#twitchEmbed {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -13,8 +12,4 @@ body {
 
 #twitchEmbed {
     flex: 3;
-}
-
-#twitchChat {
-    flex: 1;
 }

@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql2/promise');
 const app = express();
 const path = require('path');
+const axios = require("axios");
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -21,18 +22,26 @@ app.get('/channel', async (req, res) => {
 async function getChannelWithHighestPoints() {
   const connection = await mysql.createConnection({
     host: 'localhost',
-    user: 'root',
-    password: 'password',
+    user: '<username>',
+    password: '<password>',
     database: 'twitch'
   });
 
-  const [rows, fields] = await connection.execute('SELECT channel FROM channels ORDER BY points DESC LIMIT 1');
+  const [rows, fields] = await connection.execute('SELECT channel FROM channels ORDER BY points DESC');
   await connection.end();
-
-  if (rows.length > 0) {
-    return rows[0].channel;
-  } else {
-    throw new Error('No channel found');
+  for (let i = 0; i < rows.length; i++) {
+    try {
+      const res = await axios.get('https://api.twitch.tv/helix/streams?user_login=' + rows[i].channel, {
+        headers: {
+          Authorization: 'Bearer <Your_Token>',
+          'Client-ID': '<Your Client-ID>'
+        }
+      });
+      if (res.data.data[0].type === "live") {
+        return rows[i].channel;
+      }
+    } catch (err) {
+    }
   }
 }
 
