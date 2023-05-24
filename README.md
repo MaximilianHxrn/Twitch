@@ -11,20 +11,21 @@ Run `npm install --save-dev` and start the app with `node server.js`
 
 ## Config
 You are allowed to change this code:
-    `const connection = await mysql.createConnection({`
-    `host: 'localhost',`
-    `user: '<username>',`
-    `password: '<password>',`
-    `database: 'twitch'`
-    `});`
+```javascript
+const connection = await mysql.createConnection({
+    host: 'localhost',
+    user: '<username>',
+    password: '<password>',
+    database: 'twitch'
+});
+```
 and enter your credentials. Plus setup your table "channels" in the following way:
-`show create table channels;`
-
-`CREATE TABLE 'channels' (`
-`  'channel' varchar(100) DEFAULT NULL,`
-`  'id' int(11) NOT NULL AUTO_INCREMENT,`
-`  'points' int(11) DEFAULT NULL,`
-`  PRIMARY KEY ('id')`
-`);`
-
+```SQL
+CREATE TABLE 'channels' (
+  'channel' varchar(100) DEFAULT NULL,
+  'id' int(11) NOT NULL AUTO_INCREMENT,
+  'points' int(11) DEFAULT NULL,
+  PRIMARY KEY ('id')
+);
+```
 If you have any improvement, feel free to contribute. If you like this project you can support me [here](https://paypal.me/Shabib309) :)
