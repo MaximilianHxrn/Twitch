@@ -1,6 +1,5 @@
 let currentChannel = null;
 let twitchEmbed = null;
-let twitchChat = null;
 
 window.onload = async function () {
     currentChannel = await fetchChannelFromServer();
