@@ -12,7 +12,7 @@ app.get('/:username', async (req, res) => {
 });
 
 const pool = mysql.createPool({
-  host: 'localhost',
+  host: '192.168.178.66',
   user: 'remote',
   password: 'Max69546463272386954',
   database: 'twitch'
@@ -54,6 +54,6 @@ app.get('/channel/:username', async (req, res) => {
   }
 });
 
-app.listen(999, () => {
+app.listen(999, '0.0.0.0', () => {
   console.log('Server started on port 999');
 });
